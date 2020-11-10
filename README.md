@@ -26,6 +26,9 @@ include.ai Notebooks are not ideal for complex internal tools that resemble a da
 An include.ai Notebook is an interactive web notebook that allows you to build simple apps with inputs, data visualization, and raw code. You can also easily hide away all the complexity to transform your notebook into a simple linear application that anyone can use.
 
 ### Blocks
+
+![Create Blocks](images/1-new-block.png)
+
 Each include.ai Notebook is made up of a linear series of "Blocks." They are the atomic unit of the include.ai Notebook ecosystem. There are a few different types of blocks:
 
 **Display Blocks** display well-formatted data such as text and tables:
@@ -46,9 +49,10 @@ Each include.ai Notebook is made up of a linear series of "Blocks." They are the
 Check out the Block Reference section and Block Basics for the full documentation.
 
 
+### Publishing Notebook into Mini-apps
+One key feature of an include.ai Notebook is in "publishing." Upon publishing, the Notebook automatically hides away a lot of the complexity, such as raw javascript code and SQL instructions. The notebook becomes a simple-to-read, self-explanatory mini-app that anyone can use.
 
-
-
+![Create Blocks](images/2-publish-setting.png)
 
 
 
