@@ -144,7 +144,7 @@ Tables update automatically when the underlying data changes so the data you see
 
 ![Table Block](images/9-table-block.png)
 
-### Input Block
+## Input Block
 
 An input block allows a user to configure a specific variable. include.ai Notebook allows you to associate such a variable with an input element to be used anywhere later in the notebook, such as a text block or code block as inputs.
 
@@ -152,7 +152,7 @@ The display name for input blocks can contain spaces. An access name of these va
 
 ![Input Block](images/10-input-block.png)
 
-### Dropdown Block
+## Dropdown Block
 
 For some use cases, you don't necessarily want to give your user 100% creative freedom to put anything in the inputs. Dropdown blocks help you control the range of inputs for a variable.
 
@@ -163,14 +163,14 @@ You can either specify all the choices in the dropdown block itself
 ![Dropdown Block](images/11-dropdown-block.png)
 
 
-### CSV Block
+## CSV Block
 CSV blocks allow your users to upload .csv files into the notebook as a variable directly. The first row of the CSV will be interpreted as the column names. The resulting variable will be an array of JSON objects, with each item being a row from the .csv file.
 
 CSV blocks also result in new variables that can be accessed in any subsequent blocks
 
 ![CSV Block](images/12-csv-block.png)
 
-### Code Block
+## Code Block
 
 Code blocks give developers the ability to create arbitrarily complex functionality wrapped under one button.
 
@@ -178,8 +178,23 @@ In particular, each code block should be an async javascript function with 3 inp
 
 ```
 async function(args, helpers, workspace) {
-		return {
-    		hello: "world"
+	return {
+    	hello: "world"
     };
 }
 ```
+
+We'll go through each of the inputs in a little more detail below.
+
+### `args`: accessing variables in code blocks
+
+development. A full list includes:
+* `helper.wait`
+* `helper.getEmailFromText`
+* `helper.axios`
+* `helper.Airtable`
+* `helper.api`
+
+#### `helper.wait(ms: Number)`
+This function waits for a set amount of milliseconds. Sample usage:
+
