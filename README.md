@@ -170,6 +170,21 @@ CSV blocks also result in new variables that can be accessed in any subsequent b
 
 ![CSV Block](images/12-csv-block.png)
 
+## SQL Block
+
+SQL block can directly integrate with your databases and directly pull data into your notebook. You can write SQL directly in the notebook and it will be securely executed to by our server in the backend. Here is an example usage
+
+![SQL Block](images/13-sql-block.png)
+
+To setup the database connection, you have to setup the desired database as resources in the workspace. Navigate to the resource tab in workspace settings 
+
+![DB View](images/14-db-view.png)
+
+...and you should be able to add a database connection!
+
+![Add DB](images/15-add-db.png)
+
+
 ## Code Block
 
 Code blocks give developers the ability to create arbitrarily complex functionality wrapped under one button.
@@ -179,8 +194,8 @@ In particular, each code block should be an async javascript function with 3 inp
 ```
 async function(args, helpers, workspace) {
 	return {
-    	hello: "world"
-    };
+		hello: "world"
+	};
 }
 ```
 
@@ -198,3 +213,86 @@ development. A full list includes:
 #### `helper.wait(ms: Number)`
 This function waits for a set amount of milliseconds. Sample usage:
 
+```
+// this will block execution for 3000 miliseconds
+await helpers.await(3000);
+```
+
+#### `helpers.getEmailFromText(text: String)`
+This function parses out the first email address in an input string. Sample usage:
+
+```
+const email = helpers.getEmailFromText("reach us at founders@include.ai");
+// email will be "founders@include.ai"
+```
+
+#### `helpers.axios`
+This is a thin wrap around the standard Axios library (reference [here](https://github.com/axios/axios)). You can simply use this library like how you use the Axios library. Sample usage:
+
+```
+const resp = await helpers.axios({
+	method: "GET",
+	url: "https://api.covid19api.com/summary"
+});
+```
+
+#### `helpers.Airtable`
+Similar to `helpers.axios`, `helpers.Airtable` is a wrapper around the official Airtalbe javascript client. (refer to https://github.com/airtable/airtable.js/). Sample usage:
+
+```
+const airtable = new helpers.Airtable({endpointUrl: 'https://api-airtable-com-8hw7i1oz63iz.runscope.net/'})
+```
+
+#### `helpers.sql`
+This is a library that you can write SQL to be executed in memory. It's a wrapper around the open-source project [alasql](https://github.com/agershun/alasql). You're required to add in data into alasql first before writing queries.
+
+Note that with any data imported from a CSV block, they are automatically added as a table into alasql. Sample usage:
+
+```
+const peopleInLocation = helpers.sql(`
+		SELECT location, COUNT(name) as PeopleInLocation FROM input GROUP BY location
+`);
+```
+
+#### `helpers.api`
+`helpers.api` is a somewhat special package meant to be used to call any API. This package deserves a more lengthy discussion that you can check it out here: in the "Using `helpers.api` package" section below
+
+### Using `helpers.api` package
+
+#### Why use `helpers.api` over simple `axios`?
+
+You can always initiate an API call directly through the `helpers.axios` library. But helpers.api is designed to help you call APIs for notebooks that you may want to share with the public. The most significant difference is how you manage the API keys without exposing them to the world.
+
+With `helpers.api`, you don't have to store your API keys or any other sensitive data as part of your Notebook. Only an alias will be accessible to a public user who may be able to see your notebook, but not your workspace.
+
+#### Setting up Environment variables
+
+To use your API keys without security risks, you need to set up environment variables in your workspace. Start with first clicking on the three dots next to the workspace name. And then navigate to the "Environment Variables" or "Resources" tab.
+
+On the Environment Variables tab, you can add, remove, and edit your environment variables directly.
+
+![Environment Variables](images/5-env-vars-setting.png)
+
+#### Executing APIs
+
+Putting it all together, `helper.api` help you mask your sensitive data. `helper.api.caller` executes the API via the following signature: `helper.api.caller(requestConfig: Object)`. The required input `requestConfig` is the same format as request configs for the axios library. Check out the full documentation [here](https://github.com/axios/axios#request-config)
+
+Here is an example:
+
+```
+const resp = await helpers.api.caller({
+	method: "GET",
+	url: "https://api.covid19api.com/summary",
+});
+```
+This call will initiate a network request to include's backend service, where the API will be executed. Your API keys and sensitive data will be resolved at runtime there.
+
+### `workspace`: environment variables shared across notebooks
+
+`workspace` is the only optional variable that captures your workspace's configuration, like environment variables or resources. One key attribute of these workspace environment variables is that it will not expose the value of the environment variable in the notebook itself. But it will be converted to the actual value at runtime for functions like `helper.api.caller` and SQL blocks.
+
+It is recommended to use environment variables to store API keys to avoid exposing them to the general public if you decide to publish the notebook to the world. See [Using `helpers.api` package](doc:using-helpersapi-package) for details.
+
+### Publishing a notebook packages your code into a button
+
+Upon publishing a notebook, the actual code inside a code block will no longer be visible to the user of the notebook. Instead, a button would take its place that can be used to run the code block.
