@@ -99,4 +99,87 @@ To publish your notebook, click on the top right corner of a Notebook and then c
 
 One security tip: making your notebook public potentially exposes all of your code to the open world. Make sure you don't include any sensitive information like API keys in your notebook. Instead, use environment variables in API calls to protect your keys.
 
+# Block Reference
 
+## Block Basics
+
+### Variables and Data Flow
+
+Throughout include Notebooks, you'll have access to globally scope "variables." These variables can be used as inputs into code blocks or displayed texts. 
+
+There are two main ways of changing the values of a variable:
+* Use an interaction block like Input Block or Dropdown block to manually update variable values.
+* Or use a Code Block: the code block return value should be an object, and each key in the object will create or update variables with the corresponding name.
+
+Note that in each block, you can only access variables created before the said block.
+
+### Block Reactivity
+
+Data in every block updates in real-time. The display blocks will always show the most up to date data even when you run command blocks separately.
+The only exception is that code blocks would not automatically rerun when variables updates.
+
+### Conditionally Render Blocks
+
+You can also control when blocks are displayed. All blocks can be hidden or displayed by writing a simple boolean function. This is useful when you only want to expose certain portions of functionality when criteria are met.
+
+You'll still be able to edit any hidden blocks in the editor's view. The blocks will only be conditionally hidden only when a notebook becomes published.
+
+Simply click on the eye icon next to any block. You'll see an edit field to write a boolean function. You'll have access to all the variables as well.
+
+![Conditional Render](images/7-conditional-render.png)
+
+## Text Block
+
+Text blocks are the bread and butter of an include Notebook. It supports all the standard markdown format like **bolding**, *italicizing*, bullet points, code snippets, and more.
+
+Text blocks can also utilize any variables created in any previous blocks. You can easily access their values with double brackets around the variable names like {{variable name}}
+
+![Text Block](images/8-text-block.png)
+
+## Table Block
+
+Table blocks are used to display any tabular data structures. It's perfect for visualizing data pulled from your database or uploaded through CSV. The required data structure to display is in the format of an array of JSON objects
+
+Tables update automatically when the underlying data changes so the data you see is always live!
+
+![Table Block](images/9-table-block.png)
+
+### Input Block
+
+An input block allows a user to configure a specific variable. include.ai Notebook allows you to associate such a variable with an input element to be used anywhere later in the notebook, such as a text block or code block as inputs.
+
+The display name for input blocks can contain spaces. An access name of these variables will automatically be converted to camel case. For example, if you have a variable name to be `Search Query`, you'll be able to use this variable later through `args.searchQuery`. You should also see a preview of the variable underneath the input element.
+
+![Input Block](images/10-input-block.png)
+
+### Dropdown Block
+
+For some use cases, you don't necessarily want to give your user 100% creative freedom to put anything in the inputs. Dropdown blocks help you control the range of inputs for a variable.
+
+You can either specify all the choices in the dropdown block itself
+
+...or have the dropdown block pick values from another variable so long as the variable is an Array
+
+![Dropdown Block](images/11-dropdown-block.png)
+
+
+### CSV Block
+CSV blocks allow your users to upload .csv files into the notebook as a variable directly. The first row of the CSV will be interpreted as the column names. The resulting variable will be an array of JSON objects, with each item being a row from the .csv file.
+
+CSV blocks also result in new variables that can be accessed in any subsequent blocks
+
+![CSV Block](images/12-csv-block.png)
+
+### Code Block
+
+Code blocks give developers the ability to create arbitrarily complex functionality wrapped under one button.
+
+In particular, each code block should be an async javascript function with 3 inputs: `args`, `helpers`, `workspace`. Note that the output of a block needs to be an object. Each key of the return object will be interpreted as variables that will become accessible in all subsequent blocks. An example code block can look like the following
+
+```
+async function(args, helpers, workspace) {
+		return {
+    		hello: "world"
+    };
+}
+```
