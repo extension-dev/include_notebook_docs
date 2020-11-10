@@ -52,11 +52,51 @@ Check out the Block Reference section and Block Basics for the full documentatio
 ### Publishing Notebook into Mini-apps
 One key feature of an include.ai Notebook is in "publishing." Upon publishing, the Notebook automatically hides away a lot of the complexity, such as raw javascript code and SQL instructions. The notebook becomes a simple-to-read, self-explanatory mini-app that anyone can use.
 
-![Create Blocks](images/2-publish-setting.png)
+![Publish Notebook](images/2-publish-setting.png)
 
 
+## Workspaces, Sharing, and Publishing to the World
 
+### Why Workspaces?
 
+Notebooks aren't very useful by themselves. They shine in a collaborative work environment: when you're making a notebook for a team member or what to use a notebook created by your team.
 
+Introducing the Workspace concept: It is a way to organize your notebooks -- note only for yourself but also for the rest of your team. With workspaces, you have fine-grained control over not only who gets to see your notebooks but also who can make edits and publish them.
+
+Everyone starts with a personal workspace that is private to themself. You can always create workspaces and invite your colleagues through email. Click on the three dots next to the workspace name.
+
+![Modify Workspace](images/3-workspace-three-dots.png)
+
+And then type in your collaborator's email and the corresponding permission you want to assign to them.
+
+![Add Collaborators](images/4-add-collaborators.png)
+
+### Access Control through Workspaces
+
+There are three levels of permission for each workspace: Owner, Editor, and Viewer.
+
+* **Owner**: the creator of the workspace and automatically have access to edit the notebooks
+* **Editor**: can also edit the notebook and use published notebooks
+* **Viewer**: can only use published notebooks within a workspace.
+
+Differentiated access privilege across different workspaces allow you to securely deliver what the Notebook needs to accomplish by only exposing parts of your larger tooling environment.
+
+### Configuring Resources and Environment Variables for Workspaces
+
+Each Workspace also comes with configurable environment variables and resources. These environment variables can include sensitive data like API keys or common configuration setups repeated across notebooks. Resources are integrations into your systems like your Postgres database.
+
+Configure these variables and resources by first clicking on the three dots next to the workspace name. And then navigate to the "Environment Variables" or "Database" tab.
+
+![Environment Variables](images/5-env-vars-setting.png)
+
+### Publish your Notebook to the World
+
+Sometimes, you may want more than just your team to see your work. With include.ai Notebook, you can quickly publish your notebook to the rest of the world. So anyone with a shared link can visit use your published notebook.
+
+To publish your notebook, click on the top right corner of a Notebook and then click on "Share with the world."
+
+![Public Notebook](images/6-public-notebook-menu.png)
+
+One security tip: making your notebook public potentially exposes all of your code to the open world. Make sure you don't include any sensitive information like API keys in your notebook. Instead, use environment variables in API calls to protect your keys.
 
 
