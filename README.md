@@ -7,6 +7,26 @@ The [include.ai](http://include.ai/) Notebook is an interactive Notebook used to
 	<iframe src="https://player.vimeo.com/video/476520561?loop=1&autoplay=1&controls=0&sidedock=0&title=0&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 </div>
 
+(setq markdown-xhtml-header-content
+      "<style type='text/css'>
+.md-video {
+	margin: 0 auto;
+	position: relative;
+	padding-top: 80.5%;
+	border-radius: 5px;
+	box-shadow: 0 4px 4px 0 #424242a4;
+}
+.md-video > iframe {
+	border-radius: 5px;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: 0;
+}
+</style>")
+
 ### What is a Notebook?
 Here's a quick mental model: you can think of the include.ai Notebook as the "micro-service architecture" take on internal tools. **Each Notebook accomplishes a single task** (remove/add a user, change a feature flag, upload a CSV to a user's demo account)**.** Because each Notebook solves only one task, it is faster to develop and easier to use, maintain, and share than apps built with traditional UI app builders.
 
