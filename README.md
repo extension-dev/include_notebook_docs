@@ -7,7 +7,7 @@ The [include.ai](http://include.ai/) Notebook is an interactive Notebook used to
 	<iframe src="https://player.vimeo.com/video/476520561?loop=1&autoplay=1&controls=0&sidedock=0&title=0&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 </div>
 
-<style type='text/css'>
+<style type="text/css" rel="stylesheet">
 .md-video {
 	margin: 0 auto;
 	position: relative;
