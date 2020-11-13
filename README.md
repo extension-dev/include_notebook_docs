@@ -1,7 +1,11 @@
 # include.ai Notebook Documentation
 Welcome to include!
 
-The [include.ai](http://include.ai/) Notebook is a web-based interactive Notebook that can be published to hide code and data flow complexity. When published, the include.ai Notebook becomes a simple linear application that blends text (explanations) and actions (user interactions, code).
+The [include.ai](http://include.ai/) Notebook is an interactive Notebook used to build internal tools that read like documents.
+
+<div class="md-video">
+	<iframe src="https://player.vimeo.com/video/476520561?loop=1&autoplay=1&controls=0&sidedock=0&title=0&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+</div>
 
 ### What is a Notebook?
 Here's a quick mental model: you can think of the include.ai Notebook as the "micro-service architecture" take on internal tools. **Each Notebook accomplishes a single task** (remove/add a user, change a feature flag, upload a CSV to a user's demo account)**.** Because each Notebook solves only one task, it is faster to develop and easier to use, maintain, and share than apps built with traditional UI app builders.
