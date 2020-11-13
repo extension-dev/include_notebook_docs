@@ -7,8 +7,7 @@ The [include.ai](http://include.ai/) Notebook is an interactive Notebook used to
 	<iframe src="https://player.vimeo.com/video/476520561?loop=1&autoplay=1&controls=0&sidedock=0&title=0&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 </div>
 
-(setq markdown-xhtml-header-content
-      "<style type='text/css'>
+<style type='text/css'>
 .md-video {
 	margin: 0 auto;
 	position: relative;
@@ -25,7 +24,7 @@ The [include.ai](http://include.ai/) Notebook is an interactive Notebook used to
 	left: 0;
 	border: 0;
 }
-</style>")
+</style>
 
 ### What is a Notebook?
 Here's a quick mental model: you can think of the include.ai Notebook as the "micro-service architecture" take on internal tools. **Each Notebook accomplishes a single task** (remove/add a user, change a feature flag, upload a CSV to a user's demo account)**.** Because each Notebook solves only one task, it is faster to develop and easier to use, maintain, and share than apps built with traditional UI app builders.
@@ -38,16 +37,13 @@ All of our features are focused on reducing the friction to build and use Notebo
 
 ### What is it good for? 
 
-The include.ai Notebook excels at self-contained tasks that "do something." These tasks usually take user input (text input, dropdown, uploading a file), call product APIs, run SQL queries, or run Javascript. Typical use cases are: removing/adding a user, changing feature flags, joining multiple CSVs with SQL, enriching CSVs with APIs, and uploading CSVs into users' demo accounts.
+The include.ai Notebook excels at self-contained tasks that "do something." These tasks usually take user input (text input, dropdown, uploading a file), call product APIs, run SQL queries, or run Javascript. The main use case is writing code to get users (sales, marketing, recruiting tools).
 
 ### What is it not good for? (When should you not use include.ai?)
 
 include.ai Notebooks are not ideal for complex internal tools that resemble a database (check out Airtable or Retool) or for highly interactive data science apps (check out StreamLit). If you are writing an interactive essay with a focus on visualization, check out Observable. If you do not need to publish your Notebook as an app, stick with Jupyter or Google Colab.
 
 # Notebook Basics
-
-## Building a Notebook
-An include.ai Notebook is an interactive web notebook that allows you to build simple apps with inputs, data visualization, and raw code. You can also easily hide away all the complexity to transform your notebook into a simple linear application that anyone can use.
 
 ### Blocks
 
@@ -73,21 +69,23 @@ Each include.ai Notebook is made up of a linear series of "Blocks." They are the
 Check out the Block Reference section and Block Basics for the full documentation.
 
 
-### Publishing Notebook into Mini-apps
+### Publishing Notebooks into Mini-apps
 One key feature of an include.ai Notebook is in "publishing." Upon publishing, the Notebook automatically hides away a lot of the complexity, such as raw javascript code and SQL instructions. The notebook becomes a simple-to-read, self-explanatory mini-app that anyone can use.
 
 ![Publish Notebook](images/2-publish-setting.png)
 
 
-## Workspaces, Sharing, and Publishing to the World
+# Workspaces, Sharing, and Publishing to the World
 
 ### Why Workspaces?
 
-Notebooks aren't very useful by themselves. They shine in a collaborative work environment: when you're making a notebook for a team member or what to use a notebook created by your team.
+Notebooks shine in a collaborative work environment: when you're making a notebook for a team member or what to use a notebook created by your team.
 
-Introducing the Workspace concept: It is a way to organize your notebooks -- note only for yourself but also for the rest of your team. With workspaces, you have fine-grained control over not only who gets to see your notebooks but also who can make edits and publish them.
+Workspaces are how you organize notebooks. With workspaces, you have fine-grained control over not only who gets to see your notebooks but also who can make edits and publish them.
 
-Everyone starts with a personal workspace that is private to themself. You can always create workspaces and invite your colleagues through email. Click on the three dots next to the workspace name.
+Everyone starts with a personal workspace that is private. You can always create new workspaces.
+
+To invite a colleague to a workspace, click on the three dots next to the workspace name.
 
 ![Modify Workspace](images/3-workspace-three-dots.png)
 
@@ -107,7 +105,7 @@ Differentiated access privilege across different workspaces allow you to securel
 
 ### Configuring Resources and Environment Variables for Workspaces
 
-Each Workspace also comes with configurable environment variables and resources. These environment variables can include sensitive data like API keys or common configuration setups repeated across notebooks. Resources are integrations into your systems like your Postgres database.
+Each Workspace also comes with configurable environment variables and database connections. These environment variables can include sensitive data like API keys or common configuration setups repeated across notebooks. Database connections are integrations into your systems like your Postgres database.
 
 Configure these variables and resources by first clicking on the three dots next to the workspace name. And then navigate to the "Environment Variables" or "Database" tab.
 
@@ -129,7 +127,7 @@ One security tip: making your notebook public potentially exposes all of your co
 
 ### Variables and Data Flow
 
-Throughout include Notebooks, you'll have access to globally scope "variables." These variables can be used as inputs into code blocks or displayed texts. 
+Throughout include.ai Notebooks, you'll have access to globally scope "variables." These variables can be used as inputs into code blocks or displayed texts. 
 
 There are two main ways of changing the values of a variable:
 * Use an interaction block like Input Block or Dropdown block to manually update variable values.
@@ -258,13 +256,6 @@ const resp = await helpers.axios({
 	method: "GET",
 	url: "https://api.covid19api.com/summary"
 });
-```
-
-#### `helpers.Airtable`
-Similar to `helpers.axios`, `helpers.Airtable` is a wrapper around the official Airtalbe javascript client. (refer to https://github.com/airtable/airtable.js/). Sample usage:
-
-```
-const airtable = new helpers.Airtable({endpointUrl: 'https://api-airtable-com-8hw7i1oz63iz.runscope.net/'})
 ```
 
 #### `helpers.sql`
